@@ -26,7 +26,7 @@ public class StudentController {
     }
 
     @GetMapping("/students/{studentId}/courses/{courseId}")
-    public ResponseEntity retrieveDetailsForCourse(@PathVariable String studentId, @PathVariable String courseId) {
+    public ResponseEntity<Course> retrieveDetailsForCourse(@PathVariable String studentId, @PathVariable String courseId) {
         return ResponseEntity.ok(studentService.retrieveCourse(studentId, courseId));
     }
 
