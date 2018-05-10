@@ -51,10 +51,9 @@ public class StudentService {
     }
 
 
-
-
     public List<Student> retrieveAllStudents() {
-        return students;
+//        return students;
+        return studentRepository.findAll();
     }
 
     public Student retrieveStudent(String studentId) {
@@ -81,7 +80,7 @@ public class StudentService {
 
         if (student != null) {
             for (Course course : student.getEnrolled_courses()) {
-                if (course.getCourse_id().equals(courseId)) {
+                if (course.getCourseId().equals(courseId)) {
                     return course;
                 }
             }
@@ -104,7 +103,7 @@ public class StudentService {
         return course;
     }
 
-    public Student addStudent(Student student){
+    public Student addStudent(Student student) {
         studentRepository.save(student);
         return student;
     }

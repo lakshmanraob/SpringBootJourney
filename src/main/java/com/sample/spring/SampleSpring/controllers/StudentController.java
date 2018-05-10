@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -18,6 +19,11 @@ public class StudentController {
     @Autowired
     public StudentService studentService;
 
+
+    @GetMapping("/students")
+    public ResponseEntity<List<Student>> getStudents() {
+        return ResponseEntity.ok(studentService.retrieveAllStudents());
+    }
 
     @GetMapping("/students/{studentId}/courses")
     public ResponseEntity getStudentEnrolledCourses(@PathVariable String studentId) {
@@ -37,7 +43,7 @@ public class StudentController {
             return ResponseEntity.noContent().build();
         }
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getCourse_id()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getCourseId()).toUri();
 
         return ResponseEntity.created(location).body(course);
     }
