@@ -2,6 +2,8 @@ package com.sample.spring.SampleSpring.services;
 
 import com.sample.spring.SampleSpring.models.Course;
 import com.sample.spring.SampleSpring.models.Student;
+import com.sample.spring.SampleSpring.repositories.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -16,6 +18,9 @@ public class StudentService {
     private static List<Student> students = new ArrayList<>();
 
     private SecureRandom secureRandom = new SecureRandom();
+
+    @Autowired
+    public StudentRepository studentRepository;
 
     static {
         //Initialize Data
@@ -97,6 +102,11 @@ public class StudentService {
         student.getEnrolled_courses().add(course);
 
         return course;
+    }
+
+    public Student addStudent(Student student){
+        studentRepository.save(student);
+        return student;
     }
 
 }

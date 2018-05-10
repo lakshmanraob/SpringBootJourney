@@ -1,14 +1,13 @@
 package com.sample.spring.SampleSpring.controllers;
 
 import com.sample.spring.SampleSpring.models.Course;
+import com.sample.spring.SampleSpring.models.Student;
 import com.sample.spring.SampleSpring.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -41,5 +40,10 @@ public class StudentController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getCourse_id()).toUri();
 
         return ResponseEntity.created(location).body(course);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/student", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+        return ResponseEntity.ok(studentService.addStudent(student));
     }
 }
