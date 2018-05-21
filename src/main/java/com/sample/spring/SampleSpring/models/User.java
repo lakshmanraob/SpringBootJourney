@@ -14,7 +14,16 @@ public class User {
     private String userId;
     private String name;
     private Date createDate = new Date();
-    private Map<String,String> userSettings = new HashMap<>();
+    private Map<String, String> userSettings = new HashMap<>();
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getUserId() {
         return userId;
